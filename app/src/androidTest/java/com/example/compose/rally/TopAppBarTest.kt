@@ -7,6 +7,7 @@ import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onRoot
+import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.printToLog
 import com.example.compose.rally.ui.components.RallyTopAppBar
 import com.example.compose.rally.ui.theme.RallyTheme
@@ -58,5 +59,15 @@ class TopAppBarTest {
                 useUnmergedTree = true
             )
             .assertExists()
+    }
+
+    @Test
+    fun rallyTopAppBarTest_changeTabSelection() {
+        composeTestRule.setContent {
+            RallyTheme { RallyApp() }
+        }
+
+        composeTestRule.onNodeWithContentDescription(RallyScreen.Bills.name).performClick()
+        composeTestRule.onNodeWithContentDescription(RallyScreen.Bills.name).assertIsSelected()
     }
 }
